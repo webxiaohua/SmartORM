@@ -1,0 +1,4 @@
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM\bin\Debug\Smart.ORM.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM\bin\Debug\Smart.ORM.pdb
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM\obj\Debug\Smart.ORM.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM\obj\Debug\Smart.ORM.pdb

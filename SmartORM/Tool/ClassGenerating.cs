@@ -63,7 +63,7 @@ namespace Smart.ORM.Tool
         /// <param name="sql"></param>
         /// <param name="className"></param>
         /// <returns></returns>
-        public string DataTableToClass(DataTable dt, string className, string nameSpace = null, params DataRow[] allColumns)
+        private string DataTableToClass(DataTable dt, string className, string classDesc, string nameSpace = null, params DataRow[] allColumns)
         {
             StringBuilder reval = new StringBuilder();
             StringBuilder propertiesValue = new StringBuilder();
@@ -85,11 +85,14 @@ namespace Smart.ORM.Tool
                 propertiesValue.AppendFormat(@"        {0}        public {1} {2} {3}", summary, typeName, r.ColumnName, "{ get; set; }");
                 propertiesValue.AppendLine();
             }
-            reval.AppendFormat(@"   public class {0}
+            reval.AppendFormat(@"   /// <summary>
+    /// {0}
+    /// </summary>  
+    public class {1}
     {{
-        {1}
+        {2}
    }}
-            ", className, propertiesValue);
+            ",classDesc, className, propertiesValue);
 
             if (nameSpace != null)
             {
@@ -113,7 +116,7 @@ namespace {1}
         /// <param name="sql"></param>
         /// <param name="className"></param>
         /// <returns></returns>
-        public string SqlToClass(CtripORMClient db, string sql, string className)
+        public string SqlToClass(SmartORMClient db, string sql, string className, string classDesc)
         {
             using (SqlConnection conn = new SqlConnection(db.ConnectionString))
             {
@@ -123,7 +126,7 @@ namespace {1}
                 DataTable dt = new DataTable();
                 SqlDataAdapter sad = new SqlDataAdapter(command);
                 sad.Fill(dt);
-                var reval = DataTableToClass(dt, className);
+                var reval = DataTableToClass(dt, className, classDesc);
                 return reval;
             }
         }
@@ -134,10 +137,10 @@ namespace {1}
         /// <param name="sql"></param>
         /// <param name="className"></param>
         /// <returns></returns>
-        public string TableNameToClass(CtripORMClient db, string tableName)
+        public string TableNameToClass(SmartORMClient db, string tableName, string classDesc)
         {
             var dt = db.GetDataTable(string.Format("select top 1 * from {0}", tableName));
-            var reval = DataTableToClass(dt, tableName);
+            var reval = DataTableToClass(dt, tableName, classDesc);
             return reval;
         }
 
@@ -146,7 +149,7 @@ namespace {1}
         /// <summary>
         ///  创建SQL实体文件
         /// </summary>
-        public void CreateClassFiles(CtripORMClient db, string fileDirectory, string nameSpace = null)
+        public void CreateClassFiles(SmartORMClient db, string fileDirectory, string nameSpace = null)
         {
             //查询表字段结构
             string queryTablesDetail = @"select
@@ -179,15 +182,22 @@ left join
     sys.extended_properties e on e.major_id=c.object_id and e.minor_id=a.Column_id and e.class=1 
 left join
     sys.extended_properties f on f.major_id=c.object_id and f.minor_id=0 and f.class=1";
-            var tables = db.GetDataTable("select name from sysobjects where xtype='U'");
+            var tables = db.GetDataTable(@"select 
+  ROW_NUMBER() OVER (ORDER BY a.object_id) AS No, 
+  a.name AS tableName,
+  isnull(g.[value],'-') AS tableDesc
+from
+  sys.tables a left join sys.extended_properties g
+  on (a.object_id = g.major_id AND g.minor_id = 0)");
             var columns = db.GetDataTable(queryTablesDetail);
             if (tables != null && tables.Rows.Count > 0)
             {
                 foreach (DataRow dr in tables.Rows)
                 {
-                    string tableName = dr["name"].ToString();
+                    string tableName = dr["tableName"].ToString();
+                    string tableDesc = dr["tableDesc"].ToString();
                     var currentTable = db.GetDataTable(string.Format("select top 1 * from {0}", tableName));
-                    var classCode = DataTableToClass(currentTable, tableName, nameSpace, columns.Select("TableName = '" + tableName + "'"));
+                    var classCode = DataTableToClass(currentTable, tableName, tableDesc, nameSpace, columns.Select("TableName = '" + tableName + "'"));
                     FileHelper.WriteText(fileDirectory.TrimEnd('\\') + "\\" + tableName + ".cs", classCode);
                 }
             }
@@ -196,14 +206,21 @@ left join
         /// <summary>
         ///  创建SQL实体文件,指定表名
         /// </summary>
-        public void CreateClassFilesByTableNames(CtripORMClient db, string fileDirectory, string nameSpace, params string[] tableNames)
+        public void CreateClassFilesByTableNames(SmartORMClient db, string fileDirectory, string nameSpace, params string[] tableNames)
         {
-            var tables = db.GetDataTable("select name from sysobjects where xtype='U'");
+            //var tables = db.GetDataTable("select name from sysobjects where xtype='U'");
+            var tables = db.GetDataTable(@"select 
+  ROW_NUMBER() OVER (ORDER BY a.object_id) AS No, 
+  a.name AS tableName,
+  isnull(g.[value],'-') AS tableDesc
+from
+  sys.tables a left join sys.extended_properties g
+  on (a.object_id = g.major_id AND g.minor_id = 0)");
             if (tables != null && tables.Rows.Count > 0)
             {
                 foreach (DataRow dr in tables.Rows)
                 {
-                    string tableName = dr["name"].ToString().ToLower();
+                    string tableName = dr["tableName"].ToString().ToLower();
                     if (tableNames.Any(it => it.ToLower() == tableName))
                     {
                         var currentTable = db.GetDataTable(string.Format("select top 1 * from {0}", tableName));

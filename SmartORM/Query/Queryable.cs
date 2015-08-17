@@ -24,7 +24,7 @@ namespace Smart.ORM.Query
         /// <summary>
         /// 数据接口
         /// </summary>
-        public CtripORMClient DB = null;
+        public SmartORMClient DB = null;
         /// <summary>
         /// Where临时数据
         /// </summary>

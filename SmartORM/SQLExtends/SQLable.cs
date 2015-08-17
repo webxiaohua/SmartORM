@@ -15,7 +15,7 @@ namespace Smart.ORM.SQLExtends
         /// <summary>
         /// 数据库接口
         /// </summary>
-        public CtripORMClient DB = null;
+        public SmartORMClient DB = null;
         /// <summary>
         /// SQL临时语句
         /// </summary>

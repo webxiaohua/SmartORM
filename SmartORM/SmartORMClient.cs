@@ -17,9 +17,9 @@ namespace Smart.ORM
     /// @Date:2015-08-10
     /// @Desc:SQL ORM 操作类
     /// </summary>
-    public class CtripORMClient : SQLHelper
+    public class SmartORMClient : SQLHelper
     {
-        public CtripORMClient(string connectionString)
+        public SmartORMClient(string connectionString)
             : base(connectionString)
         {
             ConnectionString = connectionString;

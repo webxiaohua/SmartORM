@@ -1,0 +1,7 @@
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\SmartORMTest.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\SmartORMTest.pdb
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\Smart.ORM.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\Smart.ORM.pdb
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.csprojResolveAssemblyReference.cache
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.pdb

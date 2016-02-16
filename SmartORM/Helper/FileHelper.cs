@@ -28,7 +28,7 @@ namespace Smart.ORM.Helper
         {
             if (directory == null)
             {
-                throw new ArgumentNullException("FileSugar.GetCreatePath.directory");
+                throw new ArgumentNullException("FileHelper.GetCreatePath.directory");
             }
             directory = directory.TrimEnd('/');
             string path = new StringBuilder("{0}//{1}//{2}").AppendFormat(directory, code, fileName).ToString();
@@ -53,7 +53,7 @@ namespace Smart.ORM.Helper
         {
             if (directory == null)
             {
-                throw new ArgumentNullException("FileSugar.GetCreatePath.directory");
+                throw new ArgumentNullException("FileHelper.GetCreatePath.directory");
             }
             directory = directory.TrimEnd('/');
             string path = new StringBuilder("{0}//{1}//{2}//{3}//{4}").AppendFormat(directory, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, fileName).ToString();

@@ -13,6 +13,7 @@
     <RootNamespace>SmartORMTest</RootNamespace>
     <AssemblyName>SmartORMTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,11 +68,11 @@
     <Compile Include="GenerateClass.aspx.designer.cs">
       <DependentUpon>GenerateClass.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\School.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SmartORM\SmartORM.csproj">
       <Project>{DE149372-72C4-44E8-B1EF-4F88861E0FAB}</Project>

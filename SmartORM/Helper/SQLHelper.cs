@@ -143,7 +143,7 @@ namespace Smart.ORM.Helper
         /// <returns></returns>
         public List<T> GetList<T>(string sql, params SqlParameter[] pars)
         {
-            var reval = SQLConvertHelper.DataReaderToList<T>(typeof(T), GetReader(sql, pars));
+            var reval = SQLConvertHelper.DataReaderToList<T>(typeof(T), GetReader(sql, pars),null);
             return reval;
         }
         /// <summary>
@@ -155,7 +155,7 @@ namespace Smart.ORM.Helper
         /// <returns></returns>
         public T GetSingle<T>(string sql, params SqlParameter[] pars)
         {
-            var reval = SQLConvertHelper.DataReaderToList<T>(typeof(T), GetReader(sql, pars)).Single();
+            var reval = SQLConvertHelper.DataReaderToList<T>(typeof(T), GetReader(sql, pars),null).Single();
             return reval;
         }
 

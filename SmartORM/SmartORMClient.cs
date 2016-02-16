@@ -75,13 +75,13 @@ namespace Smart.ORM
                 }
                 return strReval;
             }
-            var reval = SQLConvertHelper.DataReaderToList<T>(type, reader);
+            var reval = SQLConvertHelper.DataReaderToList<T>(type, reader,null);
             return reval;
         }
 
         /// <summary>
         /// 批量插入
-        /// 使用说明:sqlSugar.Insert(List《entity》);
+        /// 使用说明:smartORMClient.Insert(List《entity》);
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity">插入对象</param>
@@ -99,7 +99,7 @@ namespace Smart.ORM
 
         /// <summary>
         /// 插入
-        /// 使用说明:sqlSugar.Insert(entity);
+        /// 使用说明:smartORMClient.Insert(entity);
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity">插入对象</param>
@@ -199,7 +199,7 @@ namespace Smart.ORM
         /// <summary>
         /// 更新
         /// 注意：主键必需为实体第一列
-        /// 使用说明:sqlSugar.Update《T》(rowObj,whereObj);
+        /// 使用说明:smartORMClient.Update《T》(rowObj,whereObj);
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="rowObj">new {name="张三",sex="男"}</param>
@@ -207,8 +207,8 @@ namespace Smart.ORM
         /// <returns></returns>
         public bool Update<T>(object rowObj, Expression<Func<T, bool>> expression) where T : class
         {
-            if (rowObj == null) { throw new ArgumentNullException("SqlSugarClient.Update.rowObj"); }
-            if (expression == null) { throw new ArgumentNullException("SqlSugarClient.Update.expression"); }
+            if (rowObj == null) { throw new ArgumentNullException("SmartORMClient.Update.rowObj"); }
+            if (expression == null) { throw new ArgumentNullException("SmartORMClient.Update.expression"); }
 
 
             Type type = typeof(T);

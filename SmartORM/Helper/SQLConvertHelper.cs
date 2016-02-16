@@ -26,10 +26,10 @@ namespace Smart.ORM.Helper
         /// <param name="dataReader"></param>
         /// <param name="isClose"></param>
         /// <returns></returns>
-        public static List<T> DataReaderToList<T>(Type type, IDataReader dataReader, bool isClose = true)
+        public static List<T> DataReaderToList<T>(Type type, IDataReader dataReader, string fields, bool isClose = true)
         {
             var cacheHelper = CacheHelper<IDataReaderEntityBuilder<T>>.GetInstance();
-            string key = "DataReaderToList." + type.FullName;
+            string key = "DataReaderToList." + fields + type.FullName;
             IDataReaderEntityBuilder<T> eblist = null;
             if (cacheHelper.ContainsKey(key))
             {

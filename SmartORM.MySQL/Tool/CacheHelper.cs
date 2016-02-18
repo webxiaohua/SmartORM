@@ -5,15 +5,9 @@ using System.Text;
 using System.Web;
 using System.Web.Caching;
 using System.Collections;
-using System.Linq.Expressions;
 
-namespace Smart.ORM.Helper
+namespace SmartORM.MySQL.Tool
 {
-    /// <summary>
-    /// @Author:Robin
-    /// @Date:2015-08-10
-    /// @Desc:缓存操作类
-    /// </summary>
     internal class CacheHelper<V> : IStorageObject<V>
     {
         #region 全局变量
@@ -184,7 +178,7 @@ namespace Smart.ORM.Helper
         /// <returns></returns>         
         private string CreateKey(string key)
         {
-            return "CtripORM." + key.ToString();
+            return "SmartORM." + key.ToString();
         }
 
         #endregion

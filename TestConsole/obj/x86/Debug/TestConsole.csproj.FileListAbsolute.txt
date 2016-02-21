@@ -1,0 +1,10 @@
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\obj\x86\Debug\TestConsole.csprojResolveAssemblyReference.cache
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\TestConsole.exe.config
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\TestConsole.exe
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\TestConsole.pdb
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\MySql.Data.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\Smart.NETLib.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.pdb
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\obj\x86\Debug\TestConsole.exe
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\obj\x86\Debug\TestConsole.pdb

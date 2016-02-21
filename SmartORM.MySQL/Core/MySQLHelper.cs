@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
+using System.Data;
+using System.Reflection;
 
 namespace SmartORM.MySQL.Core
 {
@@ -73,9 +75,55 @@ namespace SmartORM.MySQL.Core
             return sqlDataReader;
         }
 
-        public List<T> GetList<T>(string sql, params MySqlParameter[] parms)
+        /// <summary>
+        /// T 必须声明为引用类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parms"></param>
+        /// <returns></returns>
+        //public static List<T> ToList<T>(this IDataReader reader) where T : class, new()
+        //{
+        //    return reader.ToList<T>();
+        //}
+
+        /// <summary>
+        /// 根据对象获取参数数组
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public MySqlParameter[] GetParameters(object obj)
         {
-            return null;
+            List<MySqlParameter> listParams = new List<MySqlParameter>();
+            if (obj != null)
+            {
+                var type = obj.GetType();
+                var propertyList = type.GetProperties();
+                foreach (PropertyInfo p in propertyList)
+                {
+                    var value = p.GetValue(obj, null);
+                    if (value == null)
+                    {
+                        value = DBNull.Value;
+                    }
+                    listParams.Add(new MySqlParameter("@" + p.Name, value.ToString()));
+                }
+            }
+            return listParams.ToArray();
+        }
+
+        /// <summary>
+        /// 获取datareader
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parms"></param>
+        /// <returns></returns>
+        public MySqlDataReader GetDataReader(string sql, MySqlParameter[] parms) {
+            MySqlCommand cmd = new MySqlCommand(sql, _sqlConnection);
+            cmd.Parameters.Add(parms);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            cmd.Parameters.Clear();
+            return reader;
         }
 
         public void Dispose()

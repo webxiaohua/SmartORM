@@ -15,6 +15,7 @@ namespace SmartORM.MySQL.Core
     /// </summary>
     public class MySQLHelper : IDisposable
     {
+        private bool disposed = false;
         MySqlConnection _sqlConnection;
         /// <summary>
         /// 构造  生成sqlconnection实例并且打开连接
@@ -69,7 +70,7 @@ namespace SmartORM.MySQL.Core
         public MySqlDataReader GetReader(string sql, params MySqlParameter[] parms)
         {
             MySqlCommand cmd = new MySqlCommand(sql, _sqlConnection);
-            cmd.Parameters.Add(parms);
+            if (parms.Count() != 0) cmd.Parameters.Add(parms);
             MySqlDataReader sqlDataReader = cmd.ExecuteReader();
             cmd.Parameters.Clear();
             return sqlDataReader;
@@ -106,7 +107,7 @@ namespace SmartORM.MySQL.Core
                     {
                         value = DBNull.Value;
                     }
-                    listParams.Add(new MySqlParameter("@" + p.Name, value.ToString()));
+                    listParams.Add(new MySqlParameter("?" + p.Name, value.ToString()));
                 }
             }
             return listParams.ToArray();
@@ -118,17 +119,39 @@ namespace SmartORM.MySQL.Core
         /// <param name="sql"></param>
         /// <param name="parms"></param>
         /// <returns></returns>
-        public MySqlDataReader GetDataReader(string sql, MySqlParameter[] parms) {
+        public MySqlDataReader GetDataReader(string sql, MySqlParameter[] parms)
+        {
             MySqlCommand cmd = new MySqlCommand(sql, _sqlConnection);
-            cmd.Parameters.Add(parms);
+            if (parms.Count() != 0) cmd.Parameters.Add(parms);
             MySqlDataReader reader = cmd.ExecuteReader();
             cmd.Parameters.Clear();
             return reader;
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) { return; }
+            if (disposing)
+            {
+                //清理托管资源
+            }
+            //清理非托管资源
+            if (_sqlConnection != null)
+            {
+                _sqlConnection.Dispose();
+            }
+            disposed = true;
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);//通知垃圾回收机制不再调用析构器
+        }
+
+        ~MySQLHelper()
+        {
+            Dispose(false);//不用清理托管资源
         }
     }
 }

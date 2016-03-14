@@ -9,6 +9,8 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
+            MySqlTest.TestGetList();
+            Console.Read();
         }
     }
 }

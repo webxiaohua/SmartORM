@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GenerateClass.aspx" />
+    <Content Include="MySQLTest.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -70,10 +71,21 @@
     </Compile>
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="MySQLTest.aspx.cs">
+      <DependentUpon>MySQLTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MySQLTest.aspx.designer.cs">
+      <DependentUpon>MySQLTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\SmartORM.MySQL\SmartORM.MySQL.csproj">
+      <Project>{85ED40FD-CE4A-46EA-8099-DFCE37CF9904}</Project>
+      <Name>SmartORM.MySQL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartORM\SmartORM.csproj">
       <Project>{DE149372-72C4-44E8-B1EF-4F88861E0FAB}</Project>
       <Name>SmartORM</Name>

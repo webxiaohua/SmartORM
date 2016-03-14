@@ -26,25 +26,31 @@ namespace SmartORM.MySQL
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public Queryable<T> Queryable<T>() where T : new() {
+        public Queryable<T> Queryable<T>() where T : new()
+        {
             return new Queryable<T>() { DB = this };
         }
 
-        public List<T> Query<T>(string sql, object whereObj = null) {
+        public List<T> Query<T>(string sql, object whereObj = null) where T : class,new()
+        {
             MySqlDataReader reader = null;
             var parms = GetParameters(whereObj);
             var type = typeof(T);
             reader = GetReader(sql, parms);
-            if (type.IsIn(typeof(int), typeof(string))) {
+            if (type.IsIn(typeof(int), typeof(string)))
+            {
                 List<T> strReval = new List<T>();
-                using (MySqlDataReader re = reader) {
+                using (MySqlDataReader re = reader)
+                {
                     while (re.Read())
                     {
-                        
+                        strReval.Add((T)Convert.ChangeType(re.GetValue(0), type));
                     }
                 }
+                return strReval;
             }
-            return null;
+            var reval = reader.ToList<T>();
+            return reval;
         }
     }
 }

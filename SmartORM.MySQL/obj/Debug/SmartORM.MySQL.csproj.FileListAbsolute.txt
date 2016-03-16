@@ -7,7 +7,5 @@ E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.pdb
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\MySql.Data.dll
-F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\Smart.NETLib.dll
-F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.csprojResolveAssemblyReference.cache
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb

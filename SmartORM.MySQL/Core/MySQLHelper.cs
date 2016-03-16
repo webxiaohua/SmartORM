@@ -70,7 +70,7 @@ namespace SmartORM.MySQL.Core
         public MySqlDataReader GetReader(string sql, params MySqlParameter[] parms)
         {
             MySqlCommand cmd = new MySqlCommand(sql, _sqlConnection);
-            if (parms.Count() != 0) cmd.Parameters.Add(parms);
+            if (parms.Count() != 0) cmd.Parameters.AddRange(parms);
             MySqlDataReader sqlDataReader = cmd.ExecuteReader();
             cmd.Parameters.Clear();
             return sqlDataReader;

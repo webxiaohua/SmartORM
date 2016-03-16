@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace SmartORM.MySQL.Core
 {
@@ -46,7 +47,7 @@ namespace SmartORM.MySQL.Core
         /// <summary>
         /// 参数
         /// </summary>
-        public List<IDataParameter> Params = new List<IDataParameter>();
+        public List<MySqlParameter> Params = new List<MySqlParameter>();
         /// <summary>
         /// 表名
         /// </summary>

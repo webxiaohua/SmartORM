@@ -9,7 +9,7 @@ using System.IO;
 using System.Data;
 using SmartORM.MySQL.Builder;
 
-namespace SmartORM.MySQL.Extends
+namespace SmartORM.MySQL
 {
     public static class ExtensionFunctions
     {
@@ -23,6 +23,16 @@ namespace SmartORM.MySQL.Extends
         public static bool IsSameAs(this string str1, string str2)
         {
             return string.Compare(str1, str2, true) == 0;
+        }
+
+        /// <summary>
+        /// 获取要查找的字段 select a,b from xxx  => a,b
+        /// </summary>
+        /// <param name="selectFields"></param>
+        /// <returns></returns>
+        public static string GetSelectFields(this string selectFields)
+        {
+            return selectFields.IsNullOrEmpty() ? "*" : selectFields;
         }
 
         #region xml
@@ -123,6 +133,18 @@ namespace SmartORM.MySQL.Extends
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="reader"></param>
+        /// <returns></returns>
+        public static List<T> ToList<T>(this IDataReader reader)
+            where T : class, new()
+        {
+            return reader.ToList<T>(true);
+        }
+
+        /// <summary>
+        /// 转换成List
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="reader"></param>
         /// <param name="isClose"></param>
         /// <returns></returns>
         public static List<T> ToList<T>(this IDataReader reader, bool isClose)
@@ -141,17 +163,6 @@ namespace SmartORM.MySQL.Extends
             return list;
         }
 
-        /// <summary>
-        /// 转换成List
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="reader"></param>
-        /// <returns></returns>
-        public static List<T> ToList<T>(this IDataReader reader)
-            where T : class, new()
-        {
-            return reader.ToList<T>(true);
-        }
         #endregion
 
         #region DataTable

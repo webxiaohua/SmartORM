@@ -135,7 +135,6 @@ namespace SmartORM.MySQL
         /// <param name="reader"></param>
         /// <returns></returns>
         public static List<T> ToList<T>(this IDataReader reader)
-            where T : class, new()
         {
             return reader.ToList<T>(true);
         }
@@ -148,7 +147,6 @@ namespace SmartORM.MySQL
         /// <param name="isClose"></param>
         /// <returns></returns>
         public static List<T> ToList<T>(this IDataReader reader, bool isClose)
-            where T : class, new()
         {
             List<T> list = new List<T>();
             if (reader == null) return list;

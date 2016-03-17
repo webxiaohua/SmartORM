@@ -20,7 +20,9 @@ namespace TestConsole
         {
             using (SmartORMClient _db = new SmartORMClient(connStr))
             {
-                List<Student> list = _db.Query<Student>("select * from Student", new { UserName = "Robin" }).ToList();
+                //List<Student> list = _db.Query<Student>("select * from Student", new { UserName = "Robin" }).ToList();
+                List<Student> list = _db.Queryable<Student>().Where(c => c.ID == 2).ToList();
+                
                 Console.WriteLine(list.Count);
                 //_db.Queryable<Student>()
             }

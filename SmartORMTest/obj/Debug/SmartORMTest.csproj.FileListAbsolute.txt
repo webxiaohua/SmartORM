@@ -15,3 +15,6 @@ E:\SXH\GitProjects\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.pdb
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\SmartORM.MySQL.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\MySql.Data.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\SmartORM\SmartORMTest\bin\SmartORM.MySQL.dll
+E:\SXH\GitProjects\SmartORM\SmartORMTest\bin\MySql.Data.dll
+E:\SXH\GitProjects\SmartORM\SmartORMTest\bin\SmartORM.MySQL.pdb

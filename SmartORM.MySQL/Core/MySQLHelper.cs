@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Reflection;
+using SmartORM.MySQL.Tool;
 
 namespace SmartORM.MySQL.Core
 {
@@ -17,6 +18,9 @@ namespace SmartORM.MySQL.Core
     {
         private bool disposed = false;
         MySqlConnection _sqlConnection;
+        public int CommandTimeOut = 30000; //数据库命令执行超时时间
+        MySqlTransaction _tran = null; //事务
+
         /// <summary>
         /// 构造  生成sqlconnection实例并且打开连接
         /// </summary>
@@ -32,6 +36,26 @@ namespace SmartORM.MySQL.Core
             return Convert.ToString(GetScalar(sql, parms));
         }
 
+        public void BeginTran()
+        {
+            _tran = _sqlConnection.BeginTransaction();
+        }
+        public void RollbackTran()
+        {
+            if (_tran != null)
+            {
+                _tran.Rollback();
+                _tran = null;
+            }
+        }
+        public void CommitTran()
+        {
+            if (_tran != null)
+            {
+                _tran.Commit();
+                _tran = null;
+            }
+        }
         /// <summary>
         /// 返回首行首列结果
         /// </summary>
@@ -128,6 +152,37 @@ namespace SmartORM.MySQL.Core
             return reader;
         }
 
+        private List<KeyValuePair> _mappingTableList = null;
+
+        /// <summary>
+        /// 根据对象类型名称获取表名
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        internal string GetTableNameByClassType(string typeName)
+        {
+            if (_mappingTableList.IsValuable())
+            {
+                if (_mappingTableList.Any(c => c.Key == typeName))
+                {
+                    typeName = _mappingTableList.First(c => c.Key == typeName).Value;
+                }
+            }
+            return typeName;
+        }
+
+        /// <summary>
+        /// 设置类名和表名的映射  key 为类名  value 为表名
+        /// </summary>
+        /// <param name="mappingTables"></param>
+        public void SetMappingTables(List<KeyValuePair> mappingTables)
+        {
+            if (mappingTables.IsValuable())
+            {
+                _mappingTableList = mappingTables;
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposed) { return; }
@@ -142,6 +197,81 @@ namespace SmartORM.MySQL.Core
             }
             disposed = true;
         }
+
+        /// <summary>
+        /// 获取DataTable
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="pars"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, params MySqlParameter[] pars)
+        {
+            MySqlDataAdapter _dataAdapter = new MySqlDataAdapter(sql, _sqlConnection);
+            _dataAdapter.SelectCommand.Parameters.AddRange(pars);
+            _dataAdapter.SelectCommand.CommandTimeout = this.CommandTimeOut;
+            if (_tran != null)
+            {
+                _dataAdapter.SelectCommand.Transaction = _tran;
+            }
+            DataTable dt = new DataTable();
+            _dataAdapter.Fill(dt);
+            _dataAdapter.SelectCommand.Parameters.Clear();
+            return dt;
+        }
+
+        #region 辅助函数
+
+        /// <summary>
+        /// 获取实体类的主键
+        /// </summary>
+        /// <returns></returns>
+        internal static string GetPrimaryKeyByType(Type type) {
+            PropertyInfo[] properties = type.GetProperties();
+            foreach (var item in properties)
+            {
+                object[] attributes = item.GetCustomAttributes(typeof(PrimaryKeyAttribute), false);
+            }
+        }
+        /*
+        internal static string GetPrimaryKeyByTableName(SmartORMClient db, string tableName)
+        {
+            string key = "GetPrimaryKeyByTableName";
+            tableName = tableName.ToLower();
+            var cacheHelper = CacheHelper<List<KeyValuePair>>.GetInstance();
+            List<KeyValuePair> primaryInfo = null;
+            //获取主键信息
+            if (cacheHelper.ContainsKey(key))
+                primaryInfo = cacheHelper[key];
+            else
+            {
+
+
+                string sql = "SELECT TABLE_NAME,COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA = @DBName";
+                MySqlParameter[] parms = new MySqlParameter[] { 
+                    new MySqlParameter("@DBName",SqlDbType.VarChar)
+                };
+                parms[0].Value = db.DBName;
+                var dt = db.GetDataTable(sql, parms);
+                primaryInfo = new List<KeyValuePair>();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        primaryInfo.Add(new KeyValuePair() { Key = dr["TABLE_NAME"].ToString().ToLower(), Value = dr["COLUMN_NAME"].ToString() });
+                    }
+                }
+                cacheHelper.Add(key, primaryInfo);
+                
+            }
+            //反回主键
+            if (!primaryInfo.Any(it => it.Key == tableName))
+            {
+                return null;
+            }
+            return primaryInfo.First(it => it.Key == tableName).Value;
+        }
+        */
+        #endregion
 
         public void Dispose()
         {

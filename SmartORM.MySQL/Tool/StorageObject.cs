@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SmartORM.MySQL.Tool
 {
-    internal abstract class IStorageObject<V>
+    internal abstract class StorageObject<V>
     {
         public int Minutes = 60;
         public int Hour = 60 * 60;

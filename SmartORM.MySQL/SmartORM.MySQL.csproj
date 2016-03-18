@@ -45,16 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\PrimaryKeyAttribute.cs" />
     <Compile Include="Builder\EmitEntityBuilder.cs" />
     <Compile Include="Core\Queryable.cs" />
     <Compile Include="Extends\ExtensionFunctions.cs" />
+    <Compile Include="Extends\IEnumerableExtensions.cs" />
     <Compile Include="Extends\IsExtends.cs" />
     <Compile Include="Extends\QueryableExtensions.cs" />
+    <Compile Include="Model\KeyValuePair.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmartORMClient.cs" />
     <Compile Include="Tool\CacheHelper.cs" />
     <Compile Include="Tool\Check.cs" />
-    <Compile Include="Tool\IStorageObject.cs" />
+    <Compile Include="Tool\StorageObject.cs" />
     <Compile Include="Tool\LambdaAnalysis.cs" />
     <Compile Include="Tool\MySQLConvertHelper.cs" />
     <Compile Include="Core\MySQLHelper.cs" />

@@ -37,5 +37,16 @@ namespace SmartORM.MySQL
         {
             return string.IsNullOrEmpty(str);
         }
+
+        /// <summary>
+        /// 是否有值
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool IsValuable(this object thisValue) {
+            if (thisValue == null || thisValue == DBNull.Value) return false;
+            return thisValue.ToString() != "";
+        }
+
     }
 }

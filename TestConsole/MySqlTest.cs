@@ -8,6 +8,7 @@ namespace TestConsole
 {
     public class Student
     {
+        [PrimaryKey]
         public int ID { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
@@ -21,9 +22,10 @@ namespace TestConsole
             using (SmartORMClient _db = new SmartORMClient(connStr))
             {
                 //List<Student> list = _db.Query<Student>("select * from Student", new { UserName = "Robin" }).ToList();
-                List<Student> list = _db.Queryable<Student>().Where(c => c.ID == 2).ToList();
-                
-                Console.WriteLine(list.Count);
+                //List<Student> list = _db.Queryable<Student>().Where(c => c.ID == 2).ToList();
+                object result = _db.Insert<Student>(new Student() { UserName = "Tony", UserPassword = "111", UserEmail = "Tony@123.com" });
+
+                Console.WriteLine(result.ToString());
                 //_db.Queryable<Student>()
             }
         }

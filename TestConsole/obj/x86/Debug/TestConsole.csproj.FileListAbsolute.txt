@@ -7,3 +7,12 @@ F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\MySql.Data.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.pdb
 F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\obj\x86\Debug\TestConsole.exe
 F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\obj\x86\Debug\TestConsole.pdb
+E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\TestConsole.exe.config
+E:\SXH\GitProjects\SmartORM\TestConsole\obj\x86\Debug\TestConsole.exe
+E:\SXH\GitProjects\SmartORM\TestConsole\obj\x86\Debug\TestConsole.pdb
+E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\TestConsole.exe
+E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\TestConsole.pdb
+E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.dll
+E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\MySql.Data.dll
+E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\SmartORM\TestConsole\obj\x86\Debug\ResolveAssemblyReference.cache

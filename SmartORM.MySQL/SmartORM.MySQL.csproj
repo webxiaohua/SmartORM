@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AutoIncrementAttribute.cs" />
+    <Compile Include="Attributes\PKAttribute.cs" />
     <Compile Include="Builder\EmitEntityBuilder.cs" />
     <Compile Include="Core\Queryable.cs" />
+    <Compile Include="Extends\ArrayExtends.cs" />
     <Compile Include="Extends\ExtensionFunctions.cs" />
     <Compile Include="Extends\IsExtends.cs" />
     <Compile Include="Extends\QueryableExtensions.cs" />

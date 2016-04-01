@@ -8,6 +8,8 @@ namespace TestConsole
 {
     public class Student
     {
+        [AutoIncrement]
+        [PK]
         public int ID { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
@@ -22,10 +24,36 @@ namespace TestConsole
             {
                 //List<Student> list = _db.Query<Student>("select * from Student", new { UserName = "Robin" }).ToList();
                 List<Student> list = _db.Queryable<Student>().Where(c => c.ID == 2).ToList();
-                
+
                 Console.WriteLine(list.Count);
                 //_db.Queryable<Student>()
+                
             }
         }
+
+        public static void TestAdd() {
+            using (SmartORMClient _db = new SmartORMClient(connStr))
+            {
+                object result = _db.Insert<Student>(new Student() { UserName = "Jimmy", UserPassword = "123456", UserEmail = "Jimmy@landa.com" });
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        public static void TestUpdate() {
+            using (SmartORMClient _db = new SmartORMClient(connStr))
+            {
+                bool result = _db.Update<Student>(new { UserName = "Robinson" }, o => o.ID == 1);
+                Console.WriteLine(result.ToString());
+            }
+        }
+
+        public static void TestDelete() {
+            using (SmartORMClient _db=new SmartORMClient(connStr))
+            {
+                bool result = _db.Delete<Student>(o => o.ID == 2);
+                Console.WriteLine(result.ToString());
+            }
+        }
+
     }
 }

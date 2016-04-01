@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace SmartORM.MySQL.Tool
 {
-    internal class CacheHelper<V> : IStorageObject<V>
+    internal class CacheHelper<V> : StorageObject<V>
     {
         #region 全局变量
         private static CacheHelper<V> _instance = null;

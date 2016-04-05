@@ -45,12 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Attributes\AutoIncrementAttribute.cs" />
     <Compile Include="Attributes\PKAttribute.cs" />
-=======
     <Compile Include="Attribute\PrimaryKeyAttribute.cs" />
->>>>>>> 8a023782e2a3a71e4337df9fa727810ef0f558af
     <Compile Include="Builder\EmitEntityBuilder.cs" />
     <Compile Include="Core\Queryable.cs" />
     <Compile Include="Extends\ArrayExtends.cs" />

@@ -8,12 +8,9 @@ namespace TestConsole
 {
     public class Student
     {
-<<<<<<< HEAD
         [AutoIncrement]
         [PK]
-=======
         [PrimaryKey]
->>>>>>> 8a023782e2a3a71e4337df9fa727810ef0f558af
         public int ID { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
@@ -27,16 +24,12 @@ namespace TestConsole
             using (SmartORMClient _db = new SmartORMClient(connStr))
             {
                 //List<Student> list = _db.Query<Student>("select * from Student", new { UserName = "Robin" }).ToList();
-<<<<<<< HEAD
-                List<Student> list = _db.Queryable<Student>().Where(c => c.ID == 2).ToList();
-
+                List<Student> list = _db.Queryable<Student>().Where(c => c.ID != 2).ToList();
                 Console.WriteLine(list.Count);
-=======
                 //List<Student> list = _db.Queryable<Student>().Where(c => c.ID == 2).ToList();
-                object result = _db.Insert<Student>(new Student() { UserName = "Tony", UserPassword = "111", UserEmail = "Tony@123.com" });
+                //object result = _db.Insert<Student>(new Student() { UserName = "Tony", UserPassword = "111", UserEmail = "Tony@123.com" });
 
-                Console.WriteLine(result.ToString());
->>>>>>> 8a023782e2a3a71e4337df9fa727810ef0f558af
+                //Console.WriteLine(result.ToString());
                 //_db.Queryable<Student>()
                 
             }
@@ -53,7 +46,7 @@ namespace TestConsole
         public static void TestUpdate() {
             using (SmartORMClient _db = new SmartORMClient(connStr))
             {
-                bool result = _db.Update<Student>(new { UserName = "Robinson" }, o => o.ID == 1);
+                bool result = _db.Update<Student>(new { UserName = "Robinson2" }, o => o.ID == 1);
                 Console.WriteLine(result.ToString());
             }
         }

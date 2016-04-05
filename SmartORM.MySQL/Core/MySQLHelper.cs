@@ -230,7 +230,11 @@ namespace SmartORM.MySQL.Core
             foreach (var item in properties)
             {
                 object[] attributes = item.GetCustomAttributes(typeof(PrimaryKeyAttribute), false);
+                if (attributes.Length != 0) {
+                    return item.Name;
+                }
             }
+            return "";
         }
         /*
         internal static string GetPrimaryKeyByTableName(SmartORMClient db, string tableName)

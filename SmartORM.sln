@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM.MySQL", "SmartORM.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{2C8180EB-F834-4993-A78C-51299E42A9BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM.Sqlite", "SmartORM.Sqlite\SmartORM.Sqlite.csproj", "{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{2C8180EB-F834-4993-A78C-51299E42A9BE}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2C8180EB-F834-4993-A78C-51299E42A9BE}.Release|x86.ActiveCfg = Release|x86
 		{2C8180EB-F834-4993-A78C-51299E42A9BE}.Release|x86.Build.0 = Release|x86
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

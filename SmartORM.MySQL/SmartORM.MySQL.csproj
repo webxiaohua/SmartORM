@@ -46,8 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\AutoIncrementAttribute.cs" />
-    <Compile Include="Attributes\PKAttribute.cs" />
-    <Compile Include="Attribute\PrimaryKeyAttribute.cs" />
+    <Compile Include="Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Builder\EmitEntityBuilder.cs" />
     <Compile Include="Core\Queryable.cs" />
     <Compile Include="Extends\ArrayExtends.cs" />

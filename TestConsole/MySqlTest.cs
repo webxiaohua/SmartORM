@@ -9,7 +9,6 @@ namespace TestConsole
     public class Student
     {
         [AutoIncrement]
-        [PK]
         [PrimaryKey]
         public int ID { get; set; }
         public string UserName { get; set; }

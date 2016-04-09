@@ -3,3 +3,4 @@ F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.Sqlite\bin\Debug\SmartORM.Sqlite.p
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.Sqlite\bin\Debug\System.Data.SQLite.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.pdb
+F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.csprojResolveAssemblyReference.cache

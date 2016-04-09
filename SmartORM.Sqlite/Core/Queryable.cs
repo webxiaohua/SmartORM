@@ -31,14 +31,12 @@ namespace SmartORM.Sqlite.Core
         /// Where 临时数据
         /// </summary>
         public List<string> Where = new List<string>();
-        /// <summary>
-        /// 取后面多少条
-        /// </summary>
-        public int? Skip { get; set; }
-        /// <summary>
-        /// 取前面多少条
-        /// </summary>
-        public int? Take { get; set; }
+
+        //public int? Skip { get; set; }
+        public int PageIndex { get; set; }
+
+        //public int? Take { get; set; }
+        public int PageSize { get; set; }
 
         /// <summary>
         /// 排序

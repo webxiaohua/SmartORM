@@ -23,7 +23,7 @@ namespace SmartORM.MySQL.Tool
         public string SqlWhere = null;
         public List<MySqlParameter> Params = new List<MySqlParameter>();
 
-        public void AnalysisExpression(LambdaExpressionAnalysis lambda, Expression exp)
+        public void AnalysisWhereExpression(LambdaExpressionAnalysis lambda, Expression exp)
         {
             LambdaExpressionAnalysis.MemberType type = LambdaExpressionAnalysis.MemberType.None;
             this.SqlWhere = string.Format(" AND {0}", lambda.CreateSqlElements(exp, ref type));
@@ -36,7 +36,7 @@ namespace SmartORM.MySQL.Tool
         /// <param name="type"></param>
         /// <param name="isTrue"></param>
         /// <returns></returns>
-        public string CreateSqlElements(Expression exp, ref MemberType type, bool isTrue = true)
+        private string CreateSqlElements(Expression exp, ref MemberType type, bool isTrue = true)
         {
             if (exp is LambdaExpression)
             {

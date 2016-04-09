@@ -9,10 +9,15 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            MySqlTest.TestGetList();
+            //MySqlTest.TestGetList();
             //MySqlTest.TestAdd();
             //MySqlTest.TestUpdate();
             //MySqlTest.TestDelete();
+
+            //SqliteTest.TestUpdate();
+            SqliteTest.TestGetList();
+            //SqliteTest.TestDelete();
+            //SqliteTest.TestAdd();
             Console.Read();
         }
     }

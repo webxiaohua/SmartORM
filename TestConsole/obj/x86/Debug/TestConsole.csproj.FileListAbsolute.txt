@@ -16,3 +16,5 @@ E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.dll
 E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\MySql.Data.dll
 E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.pdb
 E:\SXH\GitProjects\SmartORM\TestConsole\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\SmartORM.Sqlite.dll
+F:\SXH\GitWorkSpace\NetCode\SmartORM\TestConsole\bin\Debug\SmartORM.Sqlite.pdb

@@ -21,11 +21,6 @@ namespace SmartORM.Sqlite
             : base(connectionString)
         {
             ConnectionString = connectionString;
-            string tmpStr = connectionString.Split(';').Where(c => c.StartsWith("database=", StringComparison.OrdinalIgnoreCase)).FirstOrDefault().ToLower();
-            if (tmpStr.IsNullOrEmpty())
-                throw new ArgumentException("connectionString:无法匹配到数据库，请检查配置");
-            else
-                DBName = tmpStr.Substring(tmpStr.IndexOf("=") + 1); //获取DBName
         }
         /// <summary>
         /// 数据库名称
@@ -134,13 +129,13 @@ namespace SmartORM.Sqlite
                 sbInsertSql.Append(" ) values(" + sbParams.ToString() + ");");
                 if (isIdentity)
                 {
-                    sbInsertSql.Append("SELECT @@IDENTITY;");
+                    //sbInsertSql.Append("SELECT @@IDENTITY;");
                 }
                 cacheSqlManager.Add(cacheSqlKey, sbInsertSql, cacheSqlManager.Day);
             }
             var sql = sbInsertSql.ToString();
-            var lastInsertRowId = GetScalar(sql, pars.ToArray());
-            return lastInsertRowId;
+            var result = ExecuteCommand(sql, pars.ToArray());
+            return result;
         }
         /// <summary>
         /// 更新
@@ -167,7 +162,7 @@ namespace SmartORM.Sqlite
                         continue;
                     }
                 }
-                sbSql.Append(string.Format(" {0} =?{0}  ,", r.Key));
+                sbSql.Append(string.Format(" {0} =@{0}  ,", r.Key));
                 ++i;
             }
             sbSql.Remove(sbSql.Length - 1, 1);

@@ -33,9 +33,11 @@ namespace SmartORM.MySQL.Core
         /// </summary>
         public List<string> Where = new List<string>();
 
-        public int? Skip { get; set; }
+        //public int? Skip { get; set; }
+        public int PageIndex { get; set; }
 
-        public int? Take { get; set; }
+        //public int? Take { get; set; }
+        public int PageSize { get; set; }
 
         /// <summary>
         /// 排序

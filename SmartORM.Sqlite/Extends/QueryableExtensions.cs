@@ -32,20 +32,22 @@ namespace SmartORM.Sqlite
             StringBuilder sql = new StringBuilder();
             try
             {
-                string orderby = queryable.OrderBy.HasValue() ? " ORDER BY " + queryable.OrderBy : "";
+                string orderby = queryable.OrderBy.HasValue() ? " ORDER BY " + queryable.OrderBy.Remove(queryable.OrderBy.Length - 1) : "";
                 sql.AppendFormat("SELECT " + queryable.Select.GetSelectFields() + " FROM {0} WHERE 1 {1} {2}", queryable.TableName.IsNullOrEmpty() ? queryable.TName : queryable.TableName, string.Join("", queryable.Where), orderby);
-               
-                if (queryable.Skip == null && queryable.Take != null)
+
+                if (queryable.PageIndex > 0)
                 {
-                    sql.Append(" LIMIT " + queryable.Take + " OFFSET 0");
+                    if (queryable.PageSize > 0)
+                    {
+                        sql.Append(" LIMIT " + queryable.PageSize + " OFFSET " + (queryable.PageIndex - 1) * queryable.PageSize);
+                    }
                 }
-                else if (queryable.Skip != null && queryable.Take == null)
+                else
                 {
-                    //sql.Append(" LIMIT " + queryable.Skip);
-                }
-                else if (queryable.Skip != null && queryable.Take != null)
-                {
-                    sql.Append(" LIMIT " + queryable.Take + " OFFSET " + queryable.Skip);
+                    if (queryable.PageSize > 0)
+                    {
+                        sql.Append(" LIMIT " + queryable.PageSize + " OFFSET 0 ");
+                    }
                 }
                 var reader = queryable.DB.GetReader(sql.ToString(), queryable.Params.ToArray());
                 List<T> result = reader.ToList<T>();
@@ -85,19 +87,31 @@ namespace SmartORM.Sqlite
         /// <returns></returns>
         public static Queryable<T> OrderBy<T>(this Queryable<T> queryable, string orderby)
         {
-            queryable.OrderBy = orderby;
+            queryable.OrderBy += orderby + " ASC,";
             return queryable;
         }
 
-        public static Queryable<T> Skip<T>(this Queryable<T> queryable, int from)
+        /// <summary>
+        /// 降序排列
+        /// </summary>
+        /// <param name="queryable"></param>
+        /// <param name="orderby"></param>
+        /// <returns></returns>
+        public static Queryable<T> OrderByDescing<T>(this Queryable<T> queryable, string orderby)
         {
-            queryable.Skip = from;
+            queryable.OrderBy += orderby + " DESC,";
             return queryable;
         }
 
-        public static Queryable<T> Take<T>(this Queryable<T> queryable, int num)
+        public static Queryable<T> PageIndex<T>(this Queryable<T> queryable, int from)
         {
-            queryable.Take = num;
+            queryable.PageIndex = from;
+            return queryable;
+        }
+
+        public static Queryable<T> PageSize<T>(this Queryable<T> queryable, int num)
+        {
+            queryable.PageSize = num;
             return queryable;
         }
 

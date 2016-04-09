@@ -47,11 +47,17 @@
     <Compile Include="MySqlTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqliteTest.cs" />
+    <Compile Include="Student.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SmartORM.MySQL\SmartORM.MySQL.csproj">
       <Project>{85ED40FD-CE4A-46EA-8099-DFCE37CF9904}</Project>
       <Name>SmartORM.MySQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartORM.Sqlite\SmartORM.Sqlite.csproj">
+      <Project>{D20CD9E9-DA34-4CCE-95E3-71667C9D992F}</Project>
+      <Name>SmartORM.Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

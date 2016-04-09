@@ -167,7 +167,7 @@ namespace SmartORM.MySQL
             sbSql.Remove(sbSql.Length - 1, 1);
             sbSql.Append(" WHERE  1=1  ");
             LambdaExpressionAnalysis re = new LambdaExpressionAnalysis();
-            re.AnalysisExpression(re, expression);
+            re.AnalysisWhereExpression(re, expression);
             sbSql.Append(re.SqlWhere);
 
             List<MySqlParameter> parsList = new List<MySqlParameter>();
@@ -186,7 +186,7 @@ namespace SmartORM.MySQL
         public bool Delete<T>(Expression<Func<T, bool>> expression) {
             Type type = typeof(T);
             LambdaExpressionAnalysis re = new LambdaExpressionAnalysis();
-            re.AnalysisExpression(re, expression);
+            re.AnalysisWhereExpression(re, expression);
             string sql = string.Format("DELETE FROM {0} WHERE 1=1 {1}", type.Name, re.SqlWhere);
             bool isSuccess = ExecuteCommand(sql, re.Params.ToArray()) > 0;
             return isSuccess;

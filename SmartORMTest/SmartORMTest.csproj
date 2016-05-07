@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GenerateClass.aspx" />
+    <Content Include="HTMLPage1.htm" />
     <Content Include="MySQLTest.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -80,7 +81,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="js\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SmartORM.MySQL\SmartORM.MySQL.csproj">
       <Project>{85ED40FD-CE4A-46EA-8099-DFCE37CF9904}</Project>

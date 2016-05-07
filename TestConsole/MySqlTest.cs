@@ -6,7 +6,7 @@ using SmartORM.MySQL;
 
 namespace TestConsole
 {
-    
+
     public class MySqlTest
     {
         static string connStr = "Server=localhost;Port=3306;Database=test;Uid=root;Pwd=root";
@@ -53,6 +53,19 @@ namespace TestConsole
             {
                 bool result = _db.Delete<Student>(o => o.ID == 2);
                 Console.WriteLine(result.ToString());
+            }
+        }
+
+        public static void TestQuery()
+        {
+            using (SmartORMClient _db = new SmartORMClient(connStr))
+            {
+                List<StudentModel> list = _db.Query<StudentModel>("select A.*,B.Name from student as A left join Class as B on A.ClassID = B.ID");
+                foreach (var item in list)
+                {
+                    Console.WriteLine(item.UserName + " " + item.Name);
+                }
+
             }
         }
 

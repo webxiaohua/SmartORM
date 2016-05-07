@@ -58,5 +58,6 @@ namespace SmartORM.MySQL.Core
         /// 分组查询
         /// </summary>
         public string GroupBy { get; set; }
+
     }
 }

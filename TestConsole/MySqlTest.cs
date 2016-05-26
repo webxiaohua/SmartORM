@@ -9,7 +9,8 @@ namespace TestConsole
 
     public class MySqlTest
     {
-        static string connStr = "Server=localhost;Port=3306;Database=test;Uid=root;Pwd=root";
+        //static string connStr = "Server=localhost;Port=3306;Database=test;Uid=root;Pwd=root";
+        static string connStr = "server=localhost;database=monitor;user=root;password=root";
         public static void TestGetList()
         {
             using (SmartORMClient _db = new SmartORMClient(connStr))
@@ -31,9 +32,16 @@ namespace TestConsole
 
         public static void TestAdd()
         {
+            /*
             using (SmartORMClient _db = new SmartORMClient(connStr))
             {
                 object result = _db.Insert<Student>(new Student() { UserName = "Jimmy6", UserPassword = "123456", UserEmail = "Jimmy6@landa.com" });
+                Console.WriteLine(result.ToString());
+            }
+             * */
+            using (SmartORMClient _db = new SmartORMClient(connStr))
+            {
+                object result = _db.Insert<UserGenModel>(new UserGenModel() { LoginName = "abc", LoginPwd = "123456", UserName = "test", UserPhone = "111111", UserEmail = "", UserStatus = 1 });
                 Console.WriteLine(result.ToString());
             }
         }
@@ -69,5 +77,12 @@ namespace TestConsole
             }
         }
 
+        public static void TestSingle()
+        {
+            using (SmartORMClient _db = new SmartORMClient(connStr))
+            {
+                UserGenModel user = _db.Queryable<UserGenModel>().Where(c => c.UserName == "test").Single();
+            }
+        }
     }
 }

@@ -154,16 +154,29 @@ namespace SmartORM.Sqlite.Core
         /// </summary>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        internal string GetTableNameByClassType(string typeName)
+        internal string GetTableNameByClassType(Type type)
         {
+            string tableName = "";
             if (_mappingTableList.IsValuable())
             {
-                if (_mappingTableList.Any(c => c.Key == typeName))
+                if (_mappingTableList.Any(c => c.Key == type.Name))
                 {
-                    typeName = _mappingTableList.First(c => c.Key == typeName).Value;
+                    tableName = _mappingTableList.First(c => c.Key == type.Name).Value;
                 }
             }
-            return typeName;
+            if (string.IsNullOrEmpty(tableName))
+            {
+                object[] attributes = type.GetCustomAttributes(typeof(TableNameAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    tableName = (attributes[0] as TableNameAttribute).TableName;
+                }
+                else
+                {
+                    tableName = type.Name;
+                }
+            }
+            return tableName;
         }
 
         /// <summary>
@@ -220,12 +233,14 @@ namespace SmartORM.Sqlite.Core
         /// 获取实体类的主键
         /// </summary>
         /// <returns></returns>
-        internal static string GetPrimaryKeyByType(Type type) {
+        internal static string GetPrimaryKeyByType(Type type)
+        {
             PropertyInfo[] properties = type.GetProperties();
             foreach (var item in properties)
             {
                 object[] attributes = item.GetCustomAttributes(typeof(PrimaryKeyAttribute), false);
-                if (attributes.Length != 0) {
+                if (attributes.Length != 0)
+                {
                     return item.Name;
                 }
             }

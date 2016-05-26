@@ -42,13 +42,14 @@ namespace SmartORM.MySQL
                         sql.Append(" LIMIT " + (queryable.PageIndex - 1) * queryable.PageSize + "," + queryable.PageSize);
                     }
                 }
-                else { 
+                else
+                {
                     if (queryable.PageSize > 0)
                     {
                         sql.Append(" LIMIT 0," + queryable.PageSize);
                     }
                 }
-                
+
                 var reader = queryable.DB.GetReader(sql.ToString(), queryable.Params.ToArray());
                 List<T> result = reader.ToList<T>();
                 queryable = null;
@@ -117,7 +118,15 @@ namespace SmartORM.MySQL
 
         public static T Single<T>(this Queryable<T> queryable)
         {
-            return queryable.ToList().Single();
+            var list = queryable.ToList();
+            if (list.Count() == 0)
+            {
+                return default(T);
+            }
+            else
+            {
+                return list.Single();
+            }
         }
     }
 }

@@ -117,7 +117,15 @@ namespace SmartORM.Sqlite
 
         public static T Single<T>(this Queryable<T> queryable)
         {
-            return queryable.ToList().Single();
+            var list = queryable.ToList();
+            if (list.Count() == 0)
+            {
+                return default(T);
+            }
+            else
+            {
+                return list.Single();
+            }
         }
     }
 }

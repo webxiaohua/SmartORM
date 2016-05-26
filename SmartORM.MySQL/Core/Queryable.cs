@@ -16,7 +16,13 @@ namespace SmartORM.MySQL.Core
         /// <summary>
         /// 类型名称
         /// </summary>
-        public string TName { get { return typeof(T).Name; } }
+        public string TName
+        {
+            get
+            {
+                return typeof(T).Name;
+            }
+        }
 
         /// <summary>
         /// 类型
@@ -53,7 +59,22 @@ namespace SmartORM.MySQL.Core
         /// <summary>
         /// 表名
         /// </summary>
-        public string TableName { get; set; }
+        public string TableName
+        {
+            get
+            {
+                object[] attributes = typeof(T).GetCustomAttributes(typeof(TableNameAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    return ((TableNameAttribute)attributes[0]).TableName;
+                }
+                else
+                {
+                    return typeof(T).Name;
+                }
+            }
+            set { }
+        }
         /// <summary>
         /// 分组查询
         /// </summary>

@@ -14,7 +14,7 @@ namespace TestConsole
             //MySqlTest.TestUpdate();
             //MySqlTest.TestDelete();
             //MySqlTest.TestQuery();
-            MySqlTest.TestSingle();
+            MySqlTest.TestGetList();
 
             //SqliteTest.TestUpdate();
             //SqliteTest.TestGetList();

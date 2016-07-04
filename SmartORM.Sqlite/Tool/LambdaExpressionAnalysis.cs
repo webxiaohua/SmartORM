@@ -56,12 +56,12 @@ namespace SmartORM.Sqlite.Tool
                 if (leftType == MemberType.Key && rightType == MemberType.Value)
                 {
                     var oldLeft = AddParas(ref left, right);
-                    return string.Format(" ({0} {1} @{2}) ", oldLeft, oper, left);
+                    return string.Format(" ({0} {1} ?{2}) ", oldLeft, oper, left);
                 }
                 else if (leftType == MemberType.Value && rightType == MemberType.Key)
                 {
                     var oldLeft = AddParas(ref right, left);
-                    return string.Format("( @{0} {1} {0} )", oldLeft, oper, right);
+                    return string.Format("( ?{0} {1} {0} )", oldLeft, oper, right);
                 }
                 else if (leftType == MemberType.Value && rightType == MemberType.Value)
                 {
@@ -254,11 +254,11 @@ namespace SmartORM.Sqlite.Tool
             SameIndex++;
             if (right == null)
             {
-                this.Params.Add(new SQLiteParameter("@" + left, DBNull.Value));
+                this.Params.Add(new SQLiteParameter("?" + left, DBNull.Value));
             }
             else
             {
-                this.Params.Add(new SQLiteParameter("@" + left, right));
+                this.Params.Add(new SQLiteParameter("?" + left, right));
             }
             return oldLeft;
         }
@@ -270,7 +270,7 @@ namespace SmartORM.Sqlite.Tool
             var left = CreateSqlElements(mce.Object, ref leftType);
             var right = CreateSqlElements(mce.Arguments[0], ref rightType);
             var oldLeft = AddParas(ref left, right);
-            return string.Format("({0} {1} LIKE '%'+@{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
+            return string.Format("({0} {1} LIKE '%'+?{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
         }
 
 
@@ -281,7 +281,7 @@ namespace SmartORM.Sqlite.Tool
             var left = CreateSqlElements(mce.Object, ref leftType);
             var right = CreateSqlElements(mce.Arguments[0], ref rightType);
             var oldLeft = AddParas(ref left, right);
-            return string.Format("({0} {1} LIKE @{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
+            return string.Format("({0} {1} LIKE ?{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
         }
         private string EndWith(string methodName, MethodCallExpression mce, bool isTure)
         {
@@ -290,7 +290,7 @@ namespace SmartORM.Sqlite.Tool
             var left = CreateSqlElements(mce.Object, ref leftType);
             var right = CreateSqlElements(mce.Arguments[0], ref rightType);
             var oldLeft = AddParas(ref left, right);
-            return string.Format("({0} {1} LIKE '%'+@{2})", oldLeft, isTure == false ? "  NOT " : null, left);
+            return string.Format("({0} {1} LIKE '%'+?{2})", oldLeft, isTure == false ? "  NOT " : null, left);
         }
 
         private string MethodTo(string methodName, MethodCallExpression mce, ref MemberType type)

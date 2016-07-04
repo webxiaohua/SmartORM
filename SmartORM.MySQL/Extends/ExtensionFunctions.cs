@@ -150,12 +150,11 @@ namespace SmartORM.MySQL
         {
             List<T> list = new List<T>();
             if (reader == null) return list;
-
-            EmitEntityBuilder<T>.DynamicMethodDelegate<IDataRecord> handler
-                = EmitEntityBuilder<T>.CreateHandler(reader);
+            EmitEntityBuilder<T>.DynamicMethodDelegate<IDataRecord> handler = EmitEntityBuilder<T>.GetHandler(reader);
             while (reader.Read())
             {
                 list.Add(handler(reader));
+                //list.Add(EmitEntityBuilder<IDataRecord>.DataReader2Obj<T>(reader));
             }
             if (isClose) { reader.Close(); reader.Dispose(); reader = null; }
             return list;
@@ -177,7 +176,7 @@ namespace SmartORM.MySQL
             if (dt == null) return list;
             //构造转换方法的委托
             EmitEntityBuilder<T>.DynamicMethodDelegate<DataRow> handler
-                = EmitEntityBuilder<T>.CreateHandler(dt.Rows[0]);
+                = EmitEntityBuilder<T>.GetHandler(dt.Rows[0]);
             foreach (DataRow info in dt.Rows)
             {
                 list.Add(handler(info));

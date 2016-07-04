@@ -65,7 +65,10 @@ namespace SmartORM.MySQL.Core
         public object GetScalar(string sql, params MySqlParameter[] parms)
         {
             MySqlCommand sqlCommand = new MySqlCommand(sql, _sqlConnection);
-            sqlCommand.Parameters.AddRange(parms);
+            if (parms != null)
+            {
+                sqlCommand.Parameters.AddRange(parms);
+            }
             object scalar = sqlCommand.ExecuteScalar();
             sqlCommand.Parameters.Clear();
             return scalar;

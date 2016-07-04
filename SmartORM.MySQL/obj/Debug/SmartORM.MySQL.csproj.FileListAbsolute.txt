@@ -1,11 +1,11 @@
-E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\ResolveAssemblyReference.cache
-E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.dll
-E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.pdb
-E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\MySql.Data.dll
-E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.dll
-E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.pdb
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\bin\Debug\MySql.Data.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.dll
 F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.dll
+E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\MySql.Data.dll
+E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\ResolveAssemblyReference.cache
+E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.dll
+E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb

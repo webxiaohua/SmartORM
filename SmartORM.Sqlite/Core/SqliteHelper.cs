@@ -60,7 +60,10 @@ namespace SmartORM.Sqlite.Core
         public object GetScalar(string sql, params SQLiteParameter[] parms)
         {
             SQLiteCommand sqlCommand = new SQLiteCommand(sql, _sqlConnection);
-            sqlCommand.Parameters.AddRange(parms);
+            if (parms != null)
+            {
+                sqlCommand.Parameters.AddRange(parms);
+            }
             object scalar = sqlCommand.ExecuteScalar();
             sqlCommand.Parameters.Clear();
             return scalar;

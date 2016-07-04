@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Collections;
 
 namespace SmartORM.MySQL.Tool
 {
@@ -56,12 +57,12 @@ namespace SmartORM.MySQL.Tool
                 if (leftType == MemberType.Key && rightType == MemberType.Value)
                 {
                     var oldLeft = AddParas(ref left, right);
-                    return string.Format(" ({0} {1} @{2}) ", oldLeft, oper, left);
+                    return string.Format(" ({0} {1} ?{2}) ", oldLeft, oper, left);
                 }
                 else if (leftType == MemberType.Value && rightType == MemberType.Key)
                 {
                     var oldLeft = AddParas(ref right, left);
-                    return string.Format("( @{0} {1} {0} )", oldLeft, oper, right);
+                    return string.Format("( ?{0} {1} {0} )", oldLeft, oper, right);
                 }
                 else if (leftType == MemberType.Value && rightType == MemberType.Value)
                 {
@@ -186,7 +187,36 @@ namespace SmartORM.MySQL.Tool
 
                     if (dynInv == null) return null;
                     else
-                        return dynInv.ToString();
+                    {
+                        if (dynInv is IList)
+                        {
+                            type = MemberType.Value;
+                            StringBuilder sb = new StringBuilder();
+                            foreach (var item in dynInv as IList)
+                            {
+                                sb.Append("'"+item + "',");
+                            }
+                            if (sb.Length > 0)
+                                return "(" + sb.ToString().Substring(0, sb.Length - 1) + ")";
+                            else return "";
+                        }
+                        else if (dynInv is Array)
+                        {
+                            type = MemberType.Value;
+                            StringBuilder sb = new StringBuilder();
+                            foreach (var item in dynInv as Array)
+                            {
+                                sb.Append("'"+item + "',");
+                            }
+                            if (sb.Length > 0)
+                                return "(" + sb.ToString().Substring(0, sb.Length - 1) + ")";
+                            else return "";
+                        }
+                        else
+                        {
+                            return dynInv.ToString();
+                        }
+                    }
                 }
                 else
                 {
@@ -254,11 +284,11 @@ namespace SmartORM.MySQL.Tool
             SameIndex++;
             if (right == null)
             {
-                this.Params.Add(new MySqlParameter("@" + left, DBNull.Value));
+                this.Params.Add(new MySqlParameter("?" + left, DBNull.Value));
             }
             else
             {
-                this.Params.Add(new MySqlParameter("@" + left, right));
+                this.Params.Add(new MySqlParameter("?" + left, right));
             }
             return oldLeft;
         }
@@ -269,8 +299,16 @@ namespace SmartORM.MySQL.Tool
             MemberType rightType = MemberType.None;
             var left = CreateSqlElements(mce.Object, ref leftType);
             var right = CreateSqlElements(mce.Arguments[0], ref rightType);
-            var oldLeft = AddParas(ref left, right);
-            return string.Format("({0} {1} LIKE '%'+@{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
+            if (leftType == MemberType.Value)
+            {
+                //in
+                return string.Format("({0} {1} IN {2})", right, isTure == false ? "  NOT " : null, left);
+            }
+            else
+            {
+                var oldLeft = AddParas(ref left, "%"+right+"%");
+                return string.Format("({0} {1} LIKE ?{2})", oldLeft, isTure == false ? "  NOT " : null, left);
+            }
         }
 
 
@@ -281,7 +319,7 @@ namespace SmartORM.MySQL.Tool
             var left = CreateSqlElements(mce.Object, ref leftType);
             var right = CreateSqlElements(mce.Arguments[0], ref rightType);
             var oldLeft = AddParas(ref left, right);
-            return string.Format("({0} {1} LIKE @{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
+            return string.Format("({0} {1} LIKE ?{2}+'%')", oldLeft, isTure == false ? "  NOT " : null, left);
         }
         private string EndWith(string methodName, MethodCallExpression mce, bool isTure)
         {
@@ -290,7 +328,7 @@ namespace SmartORM.MySQL.Tool
             var left = CreateSqlElements(mce.Object, ref leftType);
             var right = CreateSqlElements(mce.Arguments[0], ref rightType);
             var oldLeft = AddParas(ref left, right);
-            return string.Format("({0} {1} LIKE '%'+@{2})", oldLeft, isTure == false ? "  NOT " : null, left);
+            return string.Format("({0} {1} LIKE '%'+?{2})", oldLeft, isTure == false ? "  NOT " : null, left);
         }
 
         private string MethodTo(string methodName, MethodCallExpression mce, ref MemberType type)

@@ -22,7 +22,7 @@ namespace SmartORM.MySQL
         {
             var type = queryable.Type;
             LambdaExpressionAnalysis lambda = new LambdaExpressionAnalysis();
-            lambda.AnalysisWhereExpression(lambda, expression);
+            lambda.AnalysisWhereExpression(lambda, expression, queryable.Params);
             queryable.Params.AddRange(lambda.Params);
             queryable.Where.Add(lambda.SqlWhere);
             return queryable;
@@ -126,6 +126,36 @@ namespace SmartORM.MySQL
             else
             {
                 return list.Single();
+            }
+        }
+
+        /// <summary>
+        /// 聚合查询  计数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="queryable"></param>
+        /// <returns></returns>
+        public static int Count<T>(this Queryable<T> queryable)
+        {
+            StringBuilder sql = new StringBuilder();
+            try
+            {
+                int count = 0;
+                sql.AppendFormat("SELECT COUNT(*) FROM {0} WHERE 1 {1}", queryable.TableName.IsNullOrEmpty() ? queryable.TName : queryable.TableName, string.Join("", queryable.Where));
+                object val = queryable.DB.GetScalar(sql.ToString(), queryable.Params.ToArray());
+                if (val is long)
+                {
+                    count = Int32.Parse(val.ToString());
+                }
+                else if (val is int)
+                {
+                    count = (int)val;
+                }
+                return count;
+            }
+            catch (Exception ex)
+            {
+                return 0;
             }
         }
     }

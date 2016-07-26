@@ -95,6 +95,31 @@ namespace SmartORM.MySQL
             if (cacheSqlManager.ContainsKey(cacheSqlKey))
             {
                 sbInsertSql = cacheSqlManager[cacheSqlKey];
+                //3.遍历实体的属性集合 
+                Func<PropertyInfo, bool> HasAutoIncrementAttr = prop =>
+                {
+                    foreach (Attribute item in prop.GetCustomAttributes(true))
+                    {
+                        if (item is AutoIncrementAttribute)
+                            return true;
+                    }
+                    return false;
+                };
+                foreach (var prop in props)
+                {
+                    if (isIdentity)
+                    {
+                        if (HasAutoIncrementAttr(prop))
+                        {
+                            //自增列 跳过
+                            continue;
+                        }
+                    }
+                    object val = prop.GetValue(obj, null);
+                    if (val == null)
+                        val = DBNull.Value;
+                    pars.Add(new MySqlParameter("?" + prop.Name, val));
+                }
             }
             else
             {
@@ -157,7 +182,7 @@ namespace SmartORM.MySQL
             Type type = typeof(T);
             string tableName = GetTableNameByClassType(type);
             StringBuilder sbSql = new StringBuilder(string.Format(" UPDATE {0} SET ", tableName));
-            Dictionary<string, string> rows = MySQLConvertHelper.GetObjectToDictionary(rowObj);
+            Dictionary<string, DBTypeValue> rows = MySQLConvertHelper.GetObjectToDictionary(rowObj);
             int i = 0;
             foreach (var r in rows)
             {
@@ -180,7 +205,7 @@ namespace SmartORM.MySQL
 
             List<MySqlParameter> parsList = new List<MySqlParameter>();
             parsList.AddRange(re.Params);
-            parsList.AddRange(rows.Select(c => new MySqlParameter("?" + c.Key, c.Value)));
+            parsList.AddRange(rows.Select(c => new MySqlParameter("?" + c.Key, c.Value.DBValue)));
             var updateRowCount = ExecuteCommand(sbSql.ToString(), parsList.ToArray());
             return updateRowCount > 0;
         }

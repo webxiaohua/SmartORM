@@ -209,6 +209,7 @@ namespace SmartORM.MySQL.Core
             //清理非托管资源
             if (_sqlConnection != null)
             {
+                _sqlConnection.Close();
                 _sqlConnection.Dispose();
             }
             disposed = true;

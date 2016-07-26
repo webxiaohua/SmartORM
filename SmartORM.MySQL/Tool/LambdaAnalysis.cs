@@ -23,9 +23,17 @@ namespace SmartORM.MySQL.Tool
         private int SameIndex = 1;
         public string SqlWhere = null;
         public List<MySqlParameter> Params = new List<MySqlParameter>();
+        public List<MySqlParameter> AlreadyParams = new List<MySqlParameter>();
 
         public void AnalysisWhereExpression(LambdaExpressionAnalysis lambda, Expression exp)
         {
+            LambdaExpressionAnalysis.MemberType type = LambdaExpressionAnalysis.MemberType.None;
+            this.SqlWhere = string.Format(" AND {0}", lambda.CreateSqlElements(exp, ref type));
+        }
+
+        public void AnalysisWhereExpression(LambdaExpressionAnalysis lambda, Expression exp, List<MySqlParameter> alreadyParams)
+        {
+            this.AlreadyParams = alreadyParams;
             LambdaExpressionAnalysis.MemberType type = LambdaExpressionAnalysis.MemberType.None;
             this.SqlWhere = string.Format(" AND {0}", lambda.CreateSqlElements(exp, ref type));
         }
@@ -194,7 +202,7 @@ namespace SmartORM.MySQL.Tool
                             StringBuilder sb = new StringBuilder();
                             foreach (var item in dynInv as IList)
                             {
-                                sb.Append("'"+item + "',");
+                                sb.Append("'" + item + "',");
                             }
                             if (sb.Length > 0)
                                 return "(" + sb.ToString().Substring(0, sb.Length - 1) + ")";
@@ -206,7 +214,7 @@ namespace SmartORM.MySQL.Tool
                             StringBuilder sb = new StringBuilder();
                             foreach (var item in dynInv as Array)
                             {
-                                sb.Append("'"+item + "',");
+                                sb.Append("'" + item + "',");
                             }
                             if (sb.Length > 0)
                                 return "(" + sb.ToString().Substring(0, sb.Length - 1) + ")";
@@ -282,6 +290,13 @@ namespace SmartORM.MySQL.Tool
             string oldLeft = left;
             left = left + SameIndex;
             SameIndex++;
+            string parmName = "?" + left;
+            while (this.AlreadyParams.Where(c => c.ParameterName == parmName).Count() != 0)
+            {
+                left = oldLeft + SameIndex;
+                parmName = "?" + left;
+                SameIndex++;
+            }
             if (right == null)
             {
                 this.Params.Add(new MySqlParameter("?" + left, DBNull.Value));
@@ -306,7 +321,7 @@ namespace SmartORM.MySQL.Tool
             }
             else
             {
-                var oldLeft = AddParas(ref left, "%"+right+"%");
+                var oldLeft = AddParas(ref left, "%" + right + "%");
                 return string.Format("({0} {1} LIKE ?{2})", oldLeft, isTure == false ? "  NOT " : null, left);
             }
         }

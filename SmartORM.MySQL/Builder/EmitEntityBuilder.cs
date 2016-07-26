@@ -115,22 +115,35 @@ namespace SmartORM.MySQL.Builder
                 PropertyInfo propertyInfo
                     = itemType.GetProperty(dataRecord.GetName(i));  //根据列名取属性  原则上属性和列是一一对应的关系
                 Label endIfLabel = generator.DefineLabel();
+                Label ifLabel = generator.DefineLabel();
+                Label elseLabel = generator.DefineLabel();
                 if (propertyInfo != null && propertyInfo.GetSetMethod() != null)  //实体存在该属性 且该属性有SetMethod方法
                 {
-                    generator.Emit(OpCodes.Ldarg_0);
-                    generator.Emit(OpCodes.Ldc_I4, i);
+                    generator.Emit(OpCodes.Ldarg_0);//将索引 0 处的局部变量加载到计算堆栈上。
+                    generator.Emit(OpCodes.Ldc_I4, i);//将所提供的 int32 类型的值作为 int32 推送到计算堆栈上。
                     generator.Emit(OpCodes.Callvirt, isDBNullRecord);  //就知道这里要调用IsDBNull方法 如果IsDBNull==true contine
-                    generator.Emit(OpCodes.Brtrue, endIfLabel);
-                    /*If the value in the data reader is not null, the code sets the value on the object.*/
-                    generator.Emit(OpCodes.Ldloc, result);
-                    generator.Emit(OpCodes.Ldarg_0);
-                    generator.Emit(OpCodes.Ldc_I4, i);
-                    generator.Emit(OpCodes.Callvirt, getRecord); //调用get_Item方法
-                    generator.Emit(OpCodes.Unbox_Any, dataRecord.GetFieldType(i));
-                    //generator.Emit(OpCodes.Unbox_Any, propertyInfo.PropertyType);
-                    generator.Emit(OpCodes.Callvirt, propertyInfo.GetSetMethod()); //给该属性设置对应值
-                    generator.MarkLabel(endIfLabel);
+                    
+                    //generator.Emit(OpCodes.Brtrue, endIfLabel);//如果 value 为 true、非空或非零，则将控制转移到目标指令。
+                    generator.Emit(OpCodes.Brtrue, ifLabel);//如果 value 为 true、非空或非零，则将控制转移到目标指令。
+                    generator.Emit(OpCodes.Br, elseLabel);
+                    
+                    generator.MarkLabel(ifLabel);
+                    //赋值null
+                    generator.Emit(OpCodes.Br_S, endIfLabel);
 
+                    //generator.MarkLabel(endIfLabel);
+                    generator.MarkLabel(elseLabel);
+                    /*If the value in the data reader is not null, the code sets the value on the object.*/
+                    generator.Emit(OpCodes.Ldloc, result); //将指定索引处的局部变量加载到计算堆栈上。
+                    generator.Emit(OpCodes.Ldarg_0); //将索引 0 处的局部变量加载到计算堆栈上。
+                    generator.Emit(OpCodes.Ldc_I4, i); //将所提供的 int32 类型的值作为 int32 推送到计算堆栈上。
+                    generator.Emit(OpCodes.Callvirt, getRecord); //对对象调用后期绑定方法，并且将返回值推送到计算堆栈上。  调用get_Item方法  
+                    //generator.Emit(OpCodes.Unbox_Any, dataRecord.GetFieldType(i));//将指令中指定类型的已装箱的表示形式转换成未装箱形式。   db字段类型
+                    generator.Emit(OpCodes.Unbox_Any, propertyInfo.PropertyType); //对象属性类型 
+                    
+                    generator.Emit(OpCodes.Callvirt, propertyInfo.GetSetMethod()); //给该属性设置对应值
+                    generator.Emit(OpCodes.Br_S, endIfLabel);
+                    generator.MarkLabel(endIfLabel);
                 }
             }
             generator.Emit(OpCodes.Ldloc, result);

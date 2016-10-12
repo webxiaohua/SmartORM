@@ -158,5 +158,34 @@ namespace SmartORM.MySQL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 查询前几个
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="queryable"></param>
+        /// <returns></returns>
+        public static List<T> Top<T>(this Queryable<T> queryable,int count) {
+            StringBuilder sql = new StringBuilder();
+            try
+            {
+                string orderby = queryable.OrderBy.HasValue() ? " ORDER BY " + queryable.OrderBy.Remove(queryable.OrderBy.Length - 1) : "";
+                sql.AppendFormat("SELECT " + queryable.Select.GetSelectFields() + " FROM {0} WHERE 1 {1} {2}", queryable.TableName.IsNullOrEmpty() ? queryable.TName : queryable.TableName, string.Join("", queryable.Where), orderby);
+                sql.Append(" LIMIT " + count);
+                var reader = queryable.DB.GetReader(sql.ToString(), queryable.Params.ToArray());
+                List<T> result = reader.ToList<T>();
+                queryable = null;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("sql:{0}\r\n message:{1}", ex.Message));
+            }
+            finally
+            {
+                sql = null;
+                queryable = null;
+            }
+        }
     }
 }

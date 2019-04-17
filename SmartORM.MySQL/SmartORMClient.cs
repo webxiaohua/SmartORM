@@ -65,6 +65,35 @@ namespace SmartORM.MySQL
         }
 
         /// <summary>
+        /// 查询集合
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="whereObj"></param>
+        /// <returns></returns>
+        public List<dynamic> QueryDynamicList(string sql, object whereObj = null)
+        {
+            MySqlDataReader reader = null;
+            var parms = GetParameters(whereObj);
+            reader = GetReader(sql, parms);
+            var reval = DynamicHelper.DataFillDynamicList(reader);
+            return reval;
+        }
+        /// <summary>
+        /// 查询单个对象
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="whereObj"></param>
+        /// <returns></returns>
+        public dynamic QueryDynamicObj(string sql, object whereObj = null)
+        {
+            MySqlDataReader reader = null;
+            var parms = GetParameters(whereObj);
+            reader = GetReader(sql, parms);
+            var reval = DynamicHelper.DataFillDynamic(reader);
+            return reval;
+        }
+
+        /// <summary>
         /// 新增数据
         /// </summary>
         /// <typeparam name="T"></typeparam>

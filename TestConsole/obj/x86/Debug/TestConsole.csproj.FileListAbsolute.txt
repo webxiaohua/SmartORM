@@ -21,3 +21,15 @@ E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.pdb
 E:\SXH\GitProjects\SmartORM\TestConsole\bin\Debug\SmartORM.Sqlite.pdb
 E:\SXH\GitProjects\SmartORM\TestConsole\obj\x86\Debug\TestConsole.exe
 E:\SXH\GitProjects\SmartORM\TestConsole\obj\x86\Debug\TestConsole.pdb
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\TestConsole.exe.config
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\obj\x86\Debug\TestConsole.exe
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\obj\x86\Debug\TestConsole.pdb
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\obj\x86\Debug\TestConsole.csprojResolveAssemblyReference.cache
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\TestConsole.exe
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\TestConsole.pdb
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\MySql.Data.dll
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.dll
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\SmartORM.Sqlite.dll
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\System.Data.SQLite.dll
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\ttt\SmartORM\TestConsole\bin\Debug\SmartORM.Sqlite.pdb

@@ -18,3 +18,13 @@ F:\SXH\GitWorkSpace\NetCode\SmartORM\SmartORMTest\bin\SmartORM.MySQL.pdb
 E:\SXH\GitProjects\SmartORM\SmartORMTest\bin\SmartORM.MySQL.dll
 E:\SXH\GitProjects\SmartORM\SmartORMTest\bin\MySql.Data.dll
 E:\SXH\GitProjects\SmartORM\SmartORMTest\bin\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.csprojResolveAssemblyReference.cache
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\SmartORMTest.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\SmartORMTest.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\Smart.ORM.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\SmartORM.MySQL.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\MySql.Data.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\bin\Smart.ORM.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORMTest\obj\Debug\SmartORMTest.dll

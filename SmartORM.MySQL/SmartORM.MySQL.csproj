@@ -60,6 +60,7 @@
     <Compile Include="SmartORMClient.cs" />
     <Compile Include="Tool\CacheHelper.cs" />
     <Compile Include="Tool\Check.cs" />
+    <Compile Include="Tool\DynamicHelper.cs" />
     <Compile Include="Tool\StorageObject.cs" />
     <Compile Include="Tool\LambdaAnalysis.cs" />
     <Compile Include="Tool\MySQLConvertHelper.cs" />

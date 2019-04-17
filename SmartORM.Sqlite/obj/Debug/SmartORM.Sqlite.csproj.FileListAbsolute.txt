@@ -10,3 +10,8 @@ E:\SXH\GitProjects\SmartORM\SmartORM.Sqlite\bin\Debug\System.Data.SQLite.DLL
 E:\SXH\GitProjects\SmartORM\SmartORM.Sqlite\obj\Debug\ResolveAssemblyReference.cache
 E:\SXH\GitProjects\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.dll
 E:\SXH\GitProjects\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.Sqlite\bin\Debug\SmartORM.Sqlite.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.Sqlite\bin\Debug\SmartORM.Sqlite.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.Sqlite\bin\Debug\System.Data.SQLite.DLL
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.Sqlite\obj\Debug\SmartORM.Sqlite.pdb

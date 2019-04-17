@@ -7,3 +7,7 @@ E:\SXH\GitProjects\SmartORM\SmartORM\bin\Debug\Smart.ORM.pdb
 E:\SXH\GitProjects\SmartORM\SmartORM\obj\Debug\ResolveAssemblyReference.cache
 E:\SXH\GitProjects\SmartORM\SmartORM\obj\Debug\Smart.ORM.dll
 E:\SXH\GitProjects\SmartORM\SmartORM\obj\Debug\Smart.ORM.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM\bin\Debug\Smart.ORM.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM\bin\Debug\Smart.ORM.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM\obj\Debug\Smart.ORM.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM\obj\Debug\Smart.ORM.pdb

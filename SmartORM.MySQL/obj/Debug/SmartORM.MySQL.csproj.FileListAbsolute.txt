@@ -9,3 +9,8 @@ E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\bin\Debug\MySql.Data.dll
 E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\ResolveAssemblyReference.cache
 E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.dll
 E:\SXH\GitProjects\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.MySQL\bin\Debug\SmartORM.MySQL.pdb
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.MySQL\bin\Debug\MySql.Data.dll
+E:\SXH\GitProjects\ttt\SmartORM\SmartORM.MySQL\obj\Debug\SmartORM.MySQL.dll

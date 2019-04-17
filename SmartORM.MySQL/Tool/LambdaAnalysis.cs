@@ -10,6 +10,7 @@ using System.Collections;
 namespace SmartORM.MySQL.Tool
 {
     /// <summary>
+    /// http://www.cnblogs.com/feichexia/archive/2013/05/28/3104832.html
     /// 拉姆达表达式解析
     /// </summary>
     public class LambdaExpressionAnalysis
